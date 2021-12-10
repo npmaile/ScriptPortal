@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"plugin"
 
-	"github.com/npmaile/ScriptPortal/endpoints/httpHelpers"
-	"github.com/npmaile/ScriptPortal/endpoints/scriptrunner"
-	"github.com/npmaile/ScriptPortal/globals"
+	"github.com/npmaile/ScriptPortal/pkg/endpoints/httpHelpers"
+	"github.com/npmaile/ScriptPortal/pkg/endpoints/scriptrunner"
+	"github.com/npmaile/ScriptPortal/pkg/globals"
 )
 
 var port int

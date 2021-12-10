@@ -7,7 +7,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/npmaile/ScriptPortal/globals"
+	"github.com/npmaile/ScriptPortal/pkg/globals"
 )
 
 const boilerPlateFileName string = "BoilerPlate.html.template"

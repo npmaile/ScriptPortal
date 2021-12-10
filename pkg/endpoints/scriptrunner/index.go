@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/npmaile/ScriptPortal/endpoints/httpHelpers"
-	"github.com/npmaile/ScriptPortal/globals"
+	"github.com/npmaile/ScriptPortal/pkg/endpoints/httpHelpers"
+	"github.com/npmaile/ScriptPortal/pkg/globals"
 )
 
 //ScriptIndex generates an index for scripts installed and properly configured in scriptConfig.json

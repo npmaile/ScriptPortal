@@ -15,8 +15,8 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/npmaile/ScriptPortal/endpoints/httpHelpers"
-	"github.com/npmaile/ScriptPortal/globals"
+	"github.com/npmaile/ScriptPortal/pkg/endpoints/httpHelpers"
+	"github.com/npmaile/ScriptPortal/pkg/globals"
 )
 
 var singleScriptTemplate string = globals.TemplatePath + "inputform.html"
