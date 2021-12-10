@@ -4,12 +4,13 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"plugin"
 
-	"github.com/homedepot/ScriptPortal/endpoints/httpHelpers"
-	"github.com/homedepot/ScriptPortal/endpoints/scriptrunner"
-	"github.com/homedepot/ScriptPortal/globals"
+	"github.com/npmaile/ScriptPortal/endpoints/httpHelpers"
+	"github.com/npmaile/ScriptPortal/endpoints/scriptrunner"
+	"github.com/npmaile/ScriptPortal/globals"
 )
 
 var port int
@@ -47,7 +48,7 @@ func main() {
 		fmt.Printf("Error: %s", err)
 	}
 	plugDirInfo, _ := ioutil.ReadDir(pluginDirPath)
-	httpHelpers.Navs = append(httpHelpers.Navs, httpHelpers.TopBarInfo{"Scripts", "/"})
+	httpHelpers.Navs = append(httpHelpers.Navs, httpHelpers.TopBarInfo{Name: "Scripts", Link: "/"})
 	var plugins []string
 	for _, x := range plugDirInfo {
 		plugins = append(plugins, x.Name())
@@ -55,21 +56,23 @@ func main() {
 	for _, pluginPath := range plugins {
 		plug, err := plugin.Open(pluginDirPath + "/" + pluginPath)
 		if err != nil {
-			fmt.Println("error loading Plugin: %s, %s", pluginDirPath, err)
+			log.Fatalf("error loading Plugin: %s, %s\n", pluginDirPath, err.Error())
+			return
 		}
 		handlefunc, err := plug.Lookup("HandleRequest")
 		if err != nil {
-			fmt.Println("error loading symbol HandleRequest: %s, %s", pluginDirPath, err)
+			fmt.Printf("error loading symbol HandleRequest: %s, %s\n", pluginDirPath, err.Error())
 		}
 		NameFunc, err := plug.Lookup("Name")
 		if err != nil {
-			fmt.Println("error loading symbol Name: %s, %s", pluginDirPath, err)
+			fmt.Printf("error loading symbol Name: %s, %s\n", pluginDirPath, err.Error())
+			return
 		}
 		PathFunc, err := plug.Lookup("Path")
 		if err != nil {
-			fmt.Println("error loading Symbol Path: %s, %s", pluginDirPath, err)
+			fmt.Printf("error loading Symbol Path: %s, %s", pluginDirPath, err.Error())
 		}
-		httpHelpers.Navs = append(httpHelpers.Navs, httpHelpers.TopBarInfo{NameFunc.(func() string)(), PathFunc.(func() string)()})
+		httpHelpers.Navs = append(httpHelpers.Navs, httpHelpers.TopBarInfo{Name: NameFunc.(func() string)(), Link: PathFunc.(func() string)()})
 		//Have fun parsing this one!
 		http.HandleFunc(PathFunc.(func() string)(), generateHandleFunc(handlefunc.(func(http.ResponseWriter, *http.Request, chan []byte))))
 	}

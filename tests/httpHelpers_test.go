@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/homedepot/ScriptPortal/endpoints/httpHelpers"
 	"testing"
+
+	"github.com/npmaile/ScriptPortal/endpoints/httpHelpers"
 )
 
 func TestGetRelativePath(t *testing.T) {

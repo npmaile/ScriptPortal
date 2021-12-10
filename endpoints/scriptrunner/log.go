@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"github.com/homedepot/ScriptPortal/endpoints/httpHelpers"
+	"github.com/npmaile/ScriptPortal/endpoints/httpHelpers"
 )
 
 var sockets map[string]myConn

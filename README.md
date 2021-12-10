@@ -1,5 +1,7 @@
 # ScriptPortal
-![](https://github.com/homedepot/scriptportal/workflows/Go/badge.svg)
+![](https://github.com/npmaile/scriptportal/workflows/Go/badge.svg)
+
+Forked from [homedepot/scriptportal](github.com/homedepot/scriptportal)
 
 ## What is it?
 ScriptPortal is a webapp that wraps the exec function in golang to allow users to run in house created scripts at their own leisure
